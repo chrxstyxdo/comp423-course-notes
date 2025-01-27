@@ -27,6 +27,7 @@ git init
 4. Create a README file:
 ```
 echo "# COMP423 Go Project" > README.md
+echo "# https://chrxstyxdo.github.io/comp423-course-notes/tutorials/go-setup/" > README.md
 git add README.md
 git commit -m "Initial commit with README"
 ```
