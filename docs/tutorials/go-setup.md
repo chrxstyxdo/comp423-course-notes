@@ -41,7 +41,7 @@ git commit -m "Initial commit with README"
 3. Do not initialize the repository with a README, .gitignore, or license.
 4. Click **Create Repository**.
 
-### Step 3. Link your Local Repository to GitHub
+### Step 3: Link your Local Repository to GitHub
 
 1.  Add the GitHub repository as a remote:
 ```
@@ -59,9 +59,9 @@ git push --set-upstream origin main
 
 4. Back in your web browser, refresh your GitHub repository to see that the same commit you made locally has now been pushed to remote. You can use ```git log``` locally to see the commit ID and message which should match the ID of the most recent commit on GitHub. This is the result of pushing your changes to your remote repository.
 
-## Part 2. Setting Up the Development Environment
+## Part 2: Setting Up the Development Environment
 
-### Step 1. Add Development Container Configuration
+### Step 1: Add Development Container Configuration
 
 1. In VS Code, open the ```comp423-go-project directory```. You can do this via: File > Open Folder.
 2. Install the **Dev Containers** extension for VS Code.
@@ -73,25 +73,63 @@ The devcontainer.json file defines the configuration for your development enviro
     * ```customizations```: Adds useful configurations to VS Code, like installing the Go extension. When you search for VSCode extensions on the marketplace, you will find the string identifier of each extension in its sidebar. Adding extensions here ensures other developers on your project have them installed in their dev containers automatically.
     * ```postCreateCommand```: A command to run after the container is created.
 
-    ```
-    {
+```
+{
     "name": "COMP423 Course Notes",
     "image": "mcr.microsoft.com/vscode/devcontainers/go",
     "customizations": {
         "vscode": {
-        "settings": {},
-        "extensions": ["golang.go"]
+            "settings": {},
+            "extensions": ["golang.go"]
         }
-    },
-    "postCreateCommand": "go mod download"
     }
-    ```
+}
+```
 
-### Step 2. Reopen the Project in a VSCode Dev Container
+### Step 2: Reopen the Project in a VSCode Dev Container
 Reopen the project in the container by pressing ```Ctrl+Shift+P``` (or ```Cmd+Shift+P``` on Mac), typing "Dev Containers: Reopen in Container," and selecting the option. This may take a few minutes while the image is downloaded and the requirements are installed.
 
 Once your dev container setup completes, close the current terminal tab (trash can), open a new terminal pane within VSCode, and try running ```go version``` to see your dev container is running a recent version of Go.
 
+## Part 3: Creating a Go Program
+1. Inside your ```comp423-go-project directory```, create a file named ```main.go```:
+2. Open the file and write the program:
+```
+package main
 
+import "fmt"
+
+func main() {
+    fmt.Println("Hello COMP423")
+}
+```
+3. Save the file.
+4. In the terminal inside VS Code, initialize a new Go module:
+```go mod init comp423-go-project```
+
+    !!! info
+        This will create a go.mod file that manages your project's dependencies.
+
+5. Use the ```go run``` subcommand to run your program:
+```
+go run main.go
+```
+6. Expected output should be:
+```Hello COMP423```
+7. Build the program using the ```go build``` subcommand:
+```
+go build -o myprogram main.go
+```
+8. Run the binary directly:
+```
+./myprogram
+```
+9.  Expected output should be:
+```Hello COMP423```
+
+!!! info "Difference Between go run and go build"
+    The difference between go run and go build is that run combines compiling and running into one command, while build splits it into two steps. 
+    Build produces an executable binary file that you can run multiple times without recompiling. Similar to gcc in COMP211, go build is also a compiler.
+    gcc compiles C programs into executables, while go build compiles Go programs into standalone binaries.
 
 
